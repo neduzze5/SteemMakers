@@ -57,7 +57,8 @@ function generatePreview(article, post)
 
   result = getHtml(post.body, {}, 'text')
 
-  $(article).append(bodyData);
+  $("#spinner" + article).hide();
+  $("#article" + article).append(bodyData);
 }
 
 function storyPreview ( article, author, permlink )
