@@ -54,7 +54,23 @@
         <img src="https://i544.photobucket.com/albums/hh355/rdw4352/Buttons%20Name/funny-animation-1.gif" width="182" height=169"">
         <h1 class="my-4 text-primary">We're working hard to MAKE this happen</h1>
       </center>
-      <div class="row" id="article14">
+<?php
+  require_once('./src/database.php'); 
+  $database = new Database();
+  $rows = $database -> select("SELECT name, p.permlink FROM (SELECT * FROM approved_posts ORDER BY voted_on limit 5) p INNER JOIN users u ON p.author_id = u.id");
+  
+  $length = count($rows);
+  for ($i = 0; $i < $length; $i++)
+  {
+    echo '<div class="row" id="article',$i,'">';
+    echo '<div class="spinner" id="spinner',$i,'" style="float: none; margin: 0 auto;"></div>';
+    echo '<script>';
+    echo '  storyPreview(',$i,', \'',$rows[$i]['name'],'\', \'',$rows[$i]['permlink'],'\');';
+    echo '</script>';
+    echo '</div>';
+  }
+?>
+      <!-- <div class="row" id="article14">
         <div class="spinner" id="spinner14" style="float: none; margin: 0 auto;"></div>
         <script>
           storyPreview(14, 'fat-elvis', 'barn-door-project-my-wife-s-closet-part-2');
@@ -137,7 +153,7 @@
           <script>
             storyPreview(6, 'alohaoy', 'd-i-y-domino-table');
           </script>
-      </div>
+      </div> -->
     </div>
    
     <footer class="navbar-dark bg-primary fixed-bottom">
