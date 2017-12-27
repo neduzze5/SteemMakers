@@ -70,5 +70,3 @@ function storyPreview ( article, author, permlink )
 
     return test;
 }
-
-fillBlogEntries('jefpatat');
