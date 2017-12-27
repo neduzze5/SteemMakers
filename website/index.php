@@ -57,7 +57,7 @@
       <?php
         require_once('./src/database.php'); 
         $database = new Database();
-        $rows = $database -> select("SELECT name, p.permlink FROM (SELECT * FROM approved_posts ORDER BY voted_on limit 5) p INNER JOIN users u ON p.author_id = u.id");
+        $rows = $database -> select("SELECT name, p.permlink FROM (SELECT * FROM approved_posts ORDER BY voted_on DESC limit 5) p INNER JOIN users u ON p.author_id = u.id ORDER BY p.voted_on DESC");
         
         $length = count($rows);
         for ($i = 0; $i < $length; $i++)
