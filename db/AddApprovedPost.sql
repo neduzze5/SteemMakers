@@ -55,8 +55,8 @@ BEGIN
 				END IF;
 			END IF;
 			
-			INSERT INTO approved_posts(author_id, permlink, discoverer_id, category_id, reviewer_id, reviewed_on, commented_on, voted_on)
-				VALUES(authorID, permlink, discovererID, categoryID, reviewerID, NOW(), NOW(), NOW());
+			INSERT INTO approved_posts(author_id, permlink, discoverer_id, category_id, reviewer_id, reviewed_on)
+				VALUES(authorID, permlink, discovererID, categoryID, reviewerID, NOW());
 			
 			SELECT LAST_INSERT_ID() INTO approvedPostID;
 			
