@@ -1,18 +1,18 @@
+steem.api.setOptions({ url: 'https://api.steemit.com' });
+
 function fillBlogEntries(username)
 {
-    steem.api.getDiscussionsByBlog({tag: username, limit: 20}, function(err, blog) 
-        {
-          console.log(blog);
-            var blogContainer = $('#blog');
-            for (var i = 0; i < blog.length; i++) 
-            {
-                blogContainer.append('<div><a target="_blank" href="https://steemit.com' + 
-                    blog[i].url + '">'+ blog[i].created + ' ' + blog[i].title  + '</div></a>');
-            }
-        });
+    steem.api.getDiscussionsByBlog({tag: username, limit: 20}, function(err, posts) 
+    {
+      var blogContainer = $('#blog');
+      for (var i = 0; i < posts.length; i++) 
+      {
+          blogContainer.append('<div class="row">' + generatePreviewHtml(posts[i]) + '</div>');
+        }
+    });
 }
 
-function generatePreview(article, post)
+function generatePreviewImageURL(post)
 {
   const jsonMetadata = JSON.parse(post.json_metadata);
   let imagePath = '';
@@ -22,50 +22,44 @@ function generatePreview(article, post)
   {
     imagePath = getProxyImageURL(jsonMetadata.image[0], 'preview');
   }
-  else
-  {
-    const bodyImg = post.body.match(image());
-    if (bodyImg && bodyImg.length)
-    {
-      imagePath = getProxyImageURL(bodyImg[0], 'preview');
-    }
-  }
 
+  return imagePath;
+}
+
+function generatePreviewText(post)
+{
+  bodyText = '';
   bodyText = post.body.replace(/(!\[.*?\]\()(.+?)(\))/g, '');
   bodyText= bodyText.replace(/<\/?[^>]+(>|$)/g, '');
-  bodyText= bodyText.replace(/\[([^\]]+)\][^\)]+\)/g, '$1')
+  bodyText= bodyText.replace(/\[([^\]]+)\][^\)]+\)/g, '$1');
 
-  const preview =
-  {
-    image: () => `<div class="blog-image col-md-2">
-                    <img src="`+ imagePath + `">
-                  </div>`,
-    text: () => `<div class="col-md-10">
-                    <h5 class="font-weight-bold" style="margin-top:5px;">` + post.title + `</h5>
-                    <div class="multiline-ellipsis">
-                      <p>` + bodyText + `</p>
-                    </div>
-                    <a href="https://steemit.com` + post.url + `" target="_blank"><img class="media-button" src="img/steemit.png"></a>
-                    <a href="https://busy.org` + post.url + `" target="_blank"><img class="media-button" src="img/busy.png"></a>
-                  </div>`,
-  };
+  return bodyText;
+}
 
-  const bodyData = [];
+function generatePreviewHtml(post)
+{
+  previewHtml = 
+    `<div class="blog-image col-md-2">
+      <img src="`+ generatePreviewImageURL(post) + `">
+    </div>
+    <div class="col-md-10">
+      <h5 class="font-weight-bold" style="margin-top:5px;">` + post.title + `</h5>
+      <div class="multiline-ellipsis">
+        <p>` + generatePreviewText(post) + `</p>
+      </div>
+      <a href="https://steemit.com` + post.url + `" target="_blank"><img class="media-button" src="img/steemit.png"></a>
+      <a href="https://busy.org` + post.url + `" target="_blank"><img class="media-button" src="img/busy.png"></a>
+    </div>`;
 
-  bodyData.push(preview.image());
-  bodyData.push(preview.text());
-
-  result = getHtml(post.body, {}, 'text')
-
-  $("#spinner" + article).hide();
-  $("#article" + article).append(bodyData);
+    return previewHtml;
 }
 
 function storyPreview ( article, author, permlink )
 {
     var test = steem.api.getContent(author, permlink, function(err, post)
     {
-       var result = generatePreview(article, post);
+      $("#spinner" + article).hide();
+      $("#article" + article).append(generatePreviewHtml(post));
     });
 
     return test;

@@ -13,7 +13,7 @@
 
     <script src="https://cdn.jsdelivr.net/remarkable/1.7.1/remarkable.min.js"></script>
 
-    <script type="text/javascript" src="js/script.js"></script> 
+    <script type="text/javascript" src="js/script.js?t=123"></script> 
     <script type="text/javascript" src="js/image.js"></script>
     <script type="text/javascript" src="js/body.js"></script>
     <link href="css/bootstrap.min.css" rel="stylesheet"> 
@@ -31,38 +31,28 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link" href="index.html">Home</a>
+              <a class="nav-link" href="index.php">Home</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="about.html">About</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="blog.html">Blog</a>
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Blog
+				<span class="sr-only">(current)</span>
+			  </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="contact.html">Contact
-              </a>
+              <a class="nav-link" href="contact.html">Contact</a>
             </li>
           </ul>
         </div>
       </div>
     </nav>
 
-    <div class="container" style="min-height: 150px; position:relative; width: 25%;">
-      <div class="center-area">
-        <div class="centered">
-          <center>
-            <h3>
-              SteemMakers would not be what it is now without these nice people<br/><br/>
-            </h3>
-      
-            <h5>Editors</h5>
-            <a href="https://www.steemit.com/@techslut">@techslut</a><br/>
-            <a href="https://www.steemit.com/@suesa">@suesa</a><br/>
-            one anonymous steemian<br/>
-          </center>
-        </div>
-      </div>     
+    <div class="container" id="blog">
+      <script>
+        fillBlogEntries('steemmakers');
+      </script>
     </div>
    
     <footer class="navbar-dark bg-primary fixed-bottom">

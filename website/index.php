@@ -13,7 +13,7 @@
 
     <script src="https://cdn.jsdelivr.net/remarkable/1.7.1/remarkable.min.js"></script>
 
-    <script type="text/javascript" src="js/script.js?t=12345"></script> 
+    <script type="text/javascript" src="js/script.js?t=1234"></script> 
     <script type="text/javascript" src="js/image.js"></script>
     <script type="text/javascript" src="js/body.js"></script>
     <link href="css/bootstrap.min.css" rel="stylesheet"> 
@@ -39,7 +39,7 @@
               <a class="nav-link" href="about.html">About</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Blog</a>
+              <a class="nav-link" href="blog.html">Blog</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="contact.html">Contact</a>
