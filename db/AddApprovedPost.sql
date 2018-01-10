@@ -9,11 +9,11 @@ BEGIN
 	END;
 	BEGIN
 		DECLARE hasErrors BOOLEAN DEFAULT FALSE;
-		DECLARE categoryID int DEFAULT 0;
-		DECLARE authorID int DEFAULT 0;
+		DECLARE categoryID int DEFAULT NULL;
+		DECLARE authorID int DEFAULT NULL;
 		DECLARE discovererID int DEFAULT NULL;
-		DECLARE reviewerID int DEFAULT 0;
-		declare approvedPostID int default null;
+		DECLARE reviewerID int DEFAULT NULL;
+		DECLARE approvedPostID int DEFAULT NULL;
 		
 		# Check reviewer
 		SELECT reviewers.id INTO reviewerID
@@ -21,7 +21,7 @@ BEGIN
 			INNER JOIN users ON reviewers.user_id=users.id
 			WHERE name = reviewerName AND enabled = TRUE;
 		
-		IF (reviewerID = 0) THEN
+		IF (reviewerID IS NULL) THEN
 			INSERT INTO errors VALUES(1);
 		END IF;
 		
@@ -30,7 +30,7 @@ BEGIN
 			FROM categories
 			WHERE name = categoryName;
 		
-		IF (categoryID = 0) THEN
+		IF (categoryID IS NULL) THEN
 			INSERT INTO errors VALUES(2);
 		END IF; 
 		
@@ -41,7 +41,7 @@ BEGIN
 		ELSE  
 			# Author
 			SELECT id INTO authorID FROM users WHERE name = authorName;
-			IF authorID = 0 THEN
+			IF authorID IS NULL THEN
 				INSERT INTO users(name) VALUES(authorName);
 				SELECT LAST_INSERT_ID() INTO authorID;
 			END IF;
@@ -49,7 +49,7 @@ BEGIN
 			# Discoverer
 			IF (discovererName IS NOT NULL) THEN
 				SELECT id INTO discovererID FROM users WHERE name = discovererName;
-				IF discovererID = 0 THEN
+				IF discovererID IS NULL THEN
 					INSERT INTO users(name) VALUES(discovererName);
 					SELECT LAST_INSERT_ID() INTO discovererID;
 				END IF;
@@ -65,5 +65,7 @@ BEGIN
 				WHERE FIND_IN_SET(name, assignedKeywords) > 0;
 		
 		END IF; 
+
+		SELECT * FROM errors;
 	END; 
 END
