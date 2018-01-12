@@ -7,74 +7,19 @@ var mysql = require('mysql');
 var steem = require('steem');
 var fs = require('fs');
 
+steem.api.setOptions({ url: 'https://api.steemit.com' });
+
 var config;
 var mysqlConnection;
 
 function createComment(id, author, permlink)
 {
-    var commentPermlink = steem.formatter.commentPermlink(author, permlink);
-    body = "Congratulations! This post has been upvoted by SteemMakers. We are a community based project that aims to support makers and DIYers on the blockchain in every way possible. Find out more about us on our website: [www.steemmakers.com](www.steemmakers.com). <br/><br/>If you like our work, please consider upvoting this comment to support the growth of our community. Thank you.";
 
-    var wif = steem.auth.toWif(config.votingAccount, config.votingAccountPW, 'posting');
-
-    steem.broadcast.comment(wif,  author, permlink, config.votingAccount, commentPermlink, "", body, "", function(err, result)
-    {
-        if(!err && result)
-        {
-            console.log("Successful commented on id " + id);
-           
-            var query = 'UPDATE approved_posts SET commented_on = NOW() WHERE id=?';
-                        
-            mysqlConnection.query(query,[id], function (error, result, rows, fields)
-            {
-                if(!err && result)
-                {
-                    console.log("Added commenting time to database for id " + id); 
-                }
-                else
-                {
-                    console.log("Failed to add commenting time to database for id " + id); 
-                }
-            });
-        }
-        else
-        {
-            console.log("Failed to comment on id " + id);
-        }
-    });
 }
 
 function createVote(id, author, permlink)
 {
-    var commentPermlink = steem.formatter.commentPermlink(author, permlink);
- 
-    var wif = steem.auth.toWif(config.votingAccount, config.votingAccountPW, 'posting');
 
-    steem.broadcast.vote(wif, config.votingAccount, author, permlink, 10000, function(err, result)
-    {
-        if(!err && result)
-        {
-            console.log("Successfully voted on id " + id);
-
-            var query = 'UPDATE approved_posts SET voted_on = NOW() WHERE id=?';
-                        
-            mysqlConnection.query(query,[id], function (error, result, rows, fields)
-            {
-                if(!err && result)
-                {
-                    console.log("Added voting time to database for id " + id); 
-                }
-                else
-                {
-                    console.log("Failed to add voting time to database for id " + id); 
-                }
-            });
-        }
-        else
-        {
-            console.log("Failed to vote on id " + id);
-        }
-    });
 }
 
 function main()
@@ -108,17 +53,99 @@ function main()
                 }
                 else
                 {
-                    console.log(rows.length + " entries need voting and commenting");
-                    for (i = 0; i < rows.length; i++)
-                    {
-                        console.log("Entry " + i + ": id=" + rows[i].id + ", author name=" + rows[i].author_name + ", permlink=" + rows[i].permlink);
-                        createComment(rows[i].id, rows[i].author_name, rows[i].permlink);
-                        createVote(rows[i].id, rows[i].author_name, rows[i].permlink);
-                    };
-                }
-            });
-        }
-    });
+					var currentEntry = 0;
+					var totalEntries = rows.length;
+
+					console.log(rows.length + " entries need voting and commenting");
+					if(totalEntries == 0)
+					{
+						return;
+					}
+
+					var looper = function()
+					{
+
+						var currentId = rows[currentEntry].id;
+						var currentAuthor = rows[currentEntry].author_name;
+						var currentPermlink = rows[currentEntry].permlink;
+						console.log("Entry " + currentEntry + ": id=" + currentId + ", author name=" + currentAuthor + ", permlink=" + currentPermlink);
+
+						var commentPermlink = steem.formatter.commentPermlink(currentAuthor, currentPermlink);
+ 
+						var wif = steem.auth.toWif(config.votingAccount, config.votingAccountPW, 'posting');
+
+						steem.broadcast.vote(wif, config.votingAccount, currentAuthor, currentPermlink, 10000, function(err, result)
+						{
+							// Vote callback
+							if(!err && result)
+							{
+								console.log("Successfully voted on id " + currentId);
+					
+								var query = 'UPDATE approved_posts SET voted_on = NOW() WHERE id=?';
+											
+								mysqlConnection.query(query,[currentId], function (error, result, rows1, fields)
+								{
+									if(!err && result)
+									{
+										console.log("Added voting time to database for id " + currentId); 
+									}
+									else
+									{
+										console.log("Failed to add voting time to database for id " + currentId); 
+									}
+								});
+
+								var commentPermlink = steem.formatter.commentPermlink(currentAuthor, currentPermlink);
+								body = "Congratulations! This post has been upvoted by SteemMakers. We are a community based project that aims to support makers and DIYers on the blockchain in every way possible. Find out more about us on our website: [www.steemmakers.com](www.steemmakers.com). <br/><br/>If you like our work, please consider upvoting this comment to support the growth of our community. Thank you.";
+
+								steem.broadcast.comment(wif,  currentAuthor, currentPermlink, config.votingAccount, commentPermlink, "", body, "", function(err, result)
+								{
+									// Comment callback
+									if(!err && result)
+									{
+										console.log("Successful commented on id " + currentId);
+
+										var query = 'UPDATE approved_posts SET commented_on = NOW() WHERE id=?';
+
+										mysqlConnection.query(query,[currentId], function (error, result, rows2, fields)
+										{
+											if(!err && result)
+											{
+												console.log("Added commenting time to database for id " + currentId); 
+											}
+											else
+											{
+												console.log("Failed to add commenting time to database for id " + currentId); 
+											}
+										});
+
+										currentEntry++;
+										if (currentEntry == totalEntries)
+										{
+											console.log("No more entries.");
+											return;
+										}
+				
+										setTimeout(looper, 30000);
+									}
+									else
+									{
+										console.log("Failed to comment on id " + currentId);
+									}
+								});
+							}
+							else
+							{
+								console.log("Failed to vote on id " + currentId + ": " + err);
+							}
+						});
+					};
+
+					looper();
+				}
+			});
+		}
+	});
 }
 
 main();
