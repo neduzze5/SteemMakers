@@ -130,7 +130,7 @@ function main()
 									}
 									else
 									{
-										console.log("Failed to comment on id " + currentId);
+										console.log("Failed to comment on id " + currentId + ": " + err);
 									}
 								});
 							}

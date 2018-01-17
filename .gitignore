@@ -1,0 +1,10 @@
+
+bot/config/
+
+bot/node_modules/
+
+bot/package-lock\.json
+
+website/\.vscode/
+
+website/config/
