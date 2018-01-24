@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -11,46 +12,30 @@
 
 		<script src="https://cdn.jsdelivr.net/remarkable/1.7.1/remarkable.min.js"></script>
 
-		<script type="text/javascript" src="js/script.js?t=1234"></script> 
+		<script type="text/javascript" src="js/script.js"></script>
 		<script type="text/javascript" src="js/image.js"></script>
 		<script type="text/javascript" src="js/body.js"></script>
 		<link href="css/bootstrap.min.css" rel="stylesheet"> 
-		<link href="css/main.css" rel="stylesheet"> 
+		<link href="css/main.css" rel="stylesheet">
 	</head>
+
 	<body class="bg-secondary">
 		<?php include("navbar.php"); ?>
-		<div class="container">
-			<?php
-				require_once('./src/database.php'); 
-				require_once('./src/paginator.php'); 
-				$database = new Database();
-				
-				$query = "SELECT name, p.permlink FROM (SELECT * FROM approved_posts ORDER BY voted_on DESC) p INNER JOIN users u ON p.author_id = u.id ORDER BY p.voted_on DESC";
 
-				$limit = ( isset( $_GET['limit'] ) ) ? $_GET['limit'] : 5;
-				$page = ( isset( $_GET['page'] ) ) ? $_GET['page'] : 1;
-				$links = 3;
+		<div class="container" style="min-height: 150px; position:relative; width: 25%;">
+			<div class="center-area">
+				<div class="centered">
+					<center>
+						<h3>SteemMakers would not be what it is now without these nice people<br/><br/></h3>
 
-				$paginator = new Paginator( $database, $query );
-				$results = $paginator->getData( $limit, $page );
-				for ($i = 0; $i < count($results->data); $i++)
-				{
-					echo '<div class="row" id="article',$i,'">';
-					echo '<div class="spinner" id="spinner',$i,'" style="float: none; margin: 0 auto;"></div>';
-					echo '<script>';
-					echo '  storyPreview(',$i,', \'',$results->data[$i]['name'],'\', \'',$results->data[$i]['permlink'],'\');';
-					echo '</script>';
-					echo '</div>';
-				}
-			?>
-		</div>
-		<div class="text-center">
-			<div class="d-inline-block">
-				<?php
-					echo $paginator->createLinks( $links );
-				?>
+						<h5>Editors</h5>
+						<a href="https://www.steemit.com/@techslut">@techslut</a><br/>
+						<a href="https://www.steemit.com/@suesa">@suesa</a><br/>
+					</center>
+				</div>
 			</div>
 		</div>
+
 		<?php include("footer.php"); ?>
 	</body>
 </html>
