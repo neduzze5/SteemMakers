@@ -41,7 +41,7 @@
 					<center>
 					<p>
 						You will be redirected automatically.<br/>
-						  If not <a href="test/test.php">click here</a>.
+						If not <a href="test/test.php">click here</a>.
 					</p>
 					</center>
 				</div>
@@ -49,7 +49,7 @@
 		</div>
 
 		<script>
-			$(location).attr('href', '/test/test.php');
+			setTimeout(function(){$(location).attr('href', '/test/test.php');}, 5000);
 		</script>
 
 		<?php include("../footer.php"); ?>

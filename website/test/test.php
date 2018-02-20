@@ -19,8 +19,21 @@
 		<div>
 			<a href="" id='login'>Login</a>
 			<a href="test/test.php" id='logout' onclick="Logout();return false;">Logout</a>
+			<?php
+				require_once('utils.php');
+
+				if(IsAuthorizedReviewer())
+				{
+					echo '<p>Extra functionality</p>';
+				}
+				else
+				{
+					echo '<p>Limited functionality</p>';
+				}
+			?>
 		</div>
 		<script>SetProfileInfo();</script>
+
 	</body>
 
 </html>
