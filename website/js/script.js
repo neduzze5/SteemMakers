@@ -56,11 +56,15 @@ function generatePreviewHtml(post)
 
 function storyPreview ( article, author, permlink )
 {
-    var test = steem.api.getContent(author, permlink, function(err, post)
-    {
-      $("#spinner" + article).hide();
-      $("#article" + article).append(generatePreviewHtml(post));
-    });
+	var test = steem.api.getContent(author, permlink, function(err, post)
+	{
+		if(("#spinner" + article).length)
+		{
+			$("#spinner" + article).hide();
+		}
+		
+		$("#article" + article).append(generatePreviewHtml(post));
+	});
 
-    return test;
+	return test;
 }
