@@ -1,8 +1,8 @@
 sc2.init(
 {
 	app: 'steemmakers.app',
-	callbackURL: 'http://localhost/test/loggedin.php',
-	//callbackURL: 'https://www.steemmakers.com/test/loggedin.php',
+	callbackURL: 'http://localhost/loggedin.php',
+	//callbackURL: 'https://www.steemmakers.com/loggedin.php',
 	scope: ['login'],
 });
 
@@ -33,6 +33,13 @@ function SetProfileInfo()
 					$("#accountPreview").show();
 				}
 			}
+			else
+			{
+				var loginUrl = sc2.getLoginURL();
+				$("#login").attr("href", loginUrl);
+				$("#login").show();
+				$("#logout").hide();
+			}
 		});
 	}
 	else
@@ -52,6 +59,6 @@ function Logout()
 		$.removeCookie("username", { path: '/' });
 		$.removeCookie("expires_in", { path: '/' });
 
-		SetProfileInfo();
+		location.reload();
 	});
 }

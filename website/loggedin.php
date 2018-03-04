@@ -33,7 +33,7 @@
 	</head>
 
 	<body class="bg-secondary">
-		<?php include("../navbar.php"); ?>
+		<?php include("navbar.php"); ?>
 
 		<div class="container" style="position:relative; width: 25%;">
 			<div class="center-area">
@@ -41,7 +41,7 @@
 					<center>
 					<p>
 						You will be redirected automatically.<br/>
-						If not <a href="test/test.php">click here</a>.
+						If not <a href="index.php">click here</a>.
 					</p>
 					</center>
 				</div>
@@ -49,9 +49,9 @@
 		</div>
 
 		<script>
-			setTimeout(function(){$(location).attr('href', '/test/test.php');}, 5000);
+			setTimeout(function(){$(location).attr('href', 'index.php');}, 5000);
 		</script>
 
-		<?php include("../footer.php"); ?>
+		<?php include("footer.php"); ?>
 	</body>
 </html>
