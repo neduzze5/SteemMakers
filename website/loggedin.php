@@ -49,7 +49,7 @@
 		</div>
 
 		<script>
-			setTimeout(function(){$(location).attr('href', 'index.php');}, 5000);
+			setTimeout(function(){$(location).attr('href', 'index.php');}, 1000);
 		</script>
 
 		<?php include("footer.php"); ?>

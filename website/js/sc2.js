@@ -10,8 +10,6 @@ function SetProfileInfo()
 {
 	if ($.cookie("access_token") != null)
 	{
-		$("#login").hide();
-		$("#logout").show();
 		sc2.setAccessToken($.cookie("access_token"));
 		sc2.me(function (err, result)
 		{
@@ -21,24 +19,17 @@ function SetProfileInfo()
 				{
 					var profileImage = JSON.parse(result.account.json_metadata)['profile']['profile_image'];
 
+					$("#accountName").append(result.account.name);
 					if(profileImage)
 					{
-						$("#accountPreview").append(`<img src="`+ profileImage + `" height="40" width="40" style="margin-right: 10px; border-radius: 5px;">` + result.account.name);
+						$("#profileImage").attr("src", profileImage);
 					}
-					else
-					{
-						$("#accountPreview").append(result.account.name);
-					}
-
-					$("#accountPreview").show();
 				}
 			}
 			else
 			{
 				var loginUrl = sc2.getLoginURL();
 				$("#login").attr("href", loginUrl);
-				$("#login").show();
-				$("#logout").hide();
 			}
 		});
 	}
@@ -46,8 +37,6 @@ function SetProfileInfo()
 	{
 		var loginUrl = sc2.getLoginURL();
 		$("#login").attr("href", loginUrl);
-		$("#login").show();
-		$("#logout").hide();
 	}
 }
 

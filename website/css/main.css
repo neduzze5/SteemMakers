@@ -13,10 +13,40 @@ body
 
 @media (min-width: 992px)
 {
+	/* 	Copy of .align-items-end
+		To be able to apply on large screens and not apply on small screens (causes right align in hamburger) */
+	.navbar-items-bottom
+	{
+		-webkit-box-align:end !important;
+		-ms-flex-align:end !important;
+		align-items:flex-end !important;
+	}
+	.navbar-nav
+	{
+		height:40px;
+	}
 	.navbar-nav > li > a 
 	{
-		line-height: 40px;
+		padding: 4px;
+		margin: 0;
+		
 	}
+	.navbar-nav > li > p 
+	{
+		padding: 0;
+		margin: 0;
+	}
+}
+
+.navbar
+{
+	padding:0rem 0.75rem;
+}
+
+.navbar-brand
+{
+	padding: 0;
+	margin:0;
 }
 
 .footer {
@@ -26,28 +56,24 @@ body
 	height: 60px; /* Set the fixed height of the footer here */
 }
 
-.portfolio-item {
-  margin-bottom: 30px;
-}
-
 .pagination {
-  margin-bottom: 30px;
+	margin-bottom: 30px;
 }
 
 .row
 {
-  border-radius: 10px;
-  border: 1px solid #22799F;
-  border-bottom-width: 3px;
-  margin: 5px;
-  padding: 5px;
-  background-color: white;
+	border-radius: 10px;
+	border: 1px solid #22799F;
+	border-bottom-width: 3px;
+	margin: 5px;
+	padding: 5px;
+	background-color: white;
 }
 
 .blog-image{
-  height:130px;
-  text-align: center;
-  line-height: 130px;
+	height:130px;
+	text-align: center;
+	line-height: 130px;
 }
 
 .blog-image img{

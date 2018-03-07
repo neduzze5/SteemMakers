@@ -11,13 +11,16 @@
 ?>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
-	<div class="container">
-		<a class="navbar-brand" href="https://www.steemmakers.com">SteemMakers</a>
+	<div class="container"> 
+		<img src="img/logo.png" width="40" height="40" style="margin:5px;">
+		<a class="navbar-brand" href="https://www.steemmakers.com" style="font-family: sans-serif; font-weight: 800; font-style: italic; font-size: 32pt; line-height: 32pt;">
+			SteemMakers
+		</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
 		<div class="collapse navbar-collapse" id="navbarResponsive">
-			<ul class="navbar-nav ml-auto">
+			<ul class="navbar-nav ml-auto navbar-items-bottom">
 				<li class="nav-item<?php addActiveClass('/index.php'); ?>">
 					<a class="nav-link" href="index.php">Home</a>
 				</li>
@@ -42,7 +45,7 @@
 					{
 						echo 
 						'<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="accountPreview" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
+							<a class="nav-link dropdown-toggle" href="#" id="accountName" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
 							<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">';
 						if(IsAuthorizedReviewer())
 						{
@@ -51,13 +54,14 @@
 						echo
 						'		<a class="dropdown-item" href="#" id=\'logout\' onclick="Logout();return false;">Logout</a>
 							</div>
-						</li>';
+						</li>
+						<li class="nav-item d-none d-md-block"><img src="" id="profileImage" height="40" width="40" style="margin-right: 10px; border-radius: 5px;"></li>';
 					}
 					else
 					{
 						echo 
 						'<li class="nav-item dropdown">
-							<a class="nav-link" href="" id=\'login\'>Login</a><br>
+							<a class="nav-link" href="" id=\'login\'>Login</a>
 						</li>';
 					}
 				?>
