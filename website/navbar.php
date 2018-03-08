@@ -34,6 +34,7 @@
 					<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 						<a class="dropdown-item<?php addActiveClass('/about.php'); ?>" href="about.php">About</a>
 						<a class="dropdown-item<?php addActiveClass('/faq.php'); ?>" href="faq.php">FAQ</a>
+						<a class="dropdown-item<?php addActiveClass('/steemmakersdelegation.php'); ?>" href="steemmakersdelegation.php">Delegate to us</a>
 						<a class="dropdown-item<?php addActiveClass('/steemmakerstrail.php'); ?>" href="steemmakerstrail.php">Follow our trail</a>
 					</div>
 				</li>

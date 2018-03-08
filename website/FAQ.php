@@ -1,21 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
-		<script src="https://cdn.steemjs.com/lib/latest/steem.min.js"></script>
-
-		<script src="https://cdn.jsdelivr.net/remarkable/1.7.1/remarkable.min.js"></script>
-
-		<script type="text/javascript" src="js/script.js"></script> 
-		<script type="text/javascript" src="js/image.js"></script>
-		<script type="text/javascript" src="js/body.js"></script>
-		<link href="css/bootstrap.min.css" rel="stylesheet"> 
-		<link href="css/main.css" rel="stylesheet">
+		<?php include("./src/globalhead.php"); ?>
 	</head>
 	<body class="bg-secondary">
 		<?php include("navbar.php"); ?>
@@ -31,13 +17,13 @@
 				<br>
 				The makers movement is a technology driven subgroup of the DIY movement. It focuses on the creation of new devices as well as tinkering with existing ones. 
 			</p>
-            
+
 			<h4 class="my-4">What does SteemMakers do?</h4>
 			
 			<p>
 				We aim to be a guiding and helping community, supporting makers and DIYers on the steem blockchain in various ways. Have a look at our <a href="about.php" style="text-decoration: underline;">about page</a> for more details.
 			</p>
-            
+
 			<h4 class="my-4">My posts contain pictures of awesome craftwork I’ve seen on the Internet, will I be featured by SteemMakers?</h4>
 			
 			<p>
