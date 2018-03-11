@@ -80,7 +80,7 @@ function storyPreview ( article, author, permlink, callback)
 			
 			$("#article" + article).append(generatePreviewHtml(post));
 
-			typeof callback === 'function' && callback(true);
+			typeof callback === 'function' && callback(post);
 		}
 		else
 		{
@@ -88,7 +88,7 @@ function storyPreview ( article, author, permlink, callback)
 			{
 				$("#spinner" + article).hide();
 			}
-			typeof callback === 'function' && callback(false);
+			typeof callback === 'function' && callback(null);
 		}
 	});
 }

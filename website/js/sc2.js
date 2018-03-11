@@ -1,8 +1,7 @@
 sc2.init(
 {
 	app: 'steemmakers.app',
-	callbackURL: 'http://localhost/loggedin.php',
-	//callbackURL: 'https://www.steemmakers.com/loggedin.php',
+	callbackURL: sc2CallbackURL,
 	scope: ['login'],
 });
 
