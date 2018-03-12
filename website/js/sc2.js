@@ -7,9 +7,9 @@ sc2.init(
 
 function SetProfileInfo()
 {
-	if ($.cookie("access_token") != null)
+	if (Cookies.get("access_token") != null)
 	{
-		sc2.setAccessToken($.cookie("access_token"));
+		sc2.setAccessToken(Cookies("access_token"));
 		sc2.me(function (err, result)
 		{
 			if (!err)
@@ -43,9 +43,9 @@ function Logout()
 {
 	sc2.revokeToken(function (err, result)
 	{
-		$.removeCookie("access_token", { path: '/' });
-		$.removeCookie("username", { path: '/' });
-		$.removeCookie("expires_in", { path: '/' });
+		Cookies.remove("access_token", { path: '/' });
+		Cookies.remove("username", { path: '/' });
+		Cookies.remove("expires_in", { path: '/' });
 
 		location.reload();
 	});
