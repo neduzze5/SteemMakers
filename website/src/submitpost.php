@@ -1,6 +1,6 @@
 <?php
-	require_once('./src/utils.php');
-	require_once('./src/database.php');
+	require_once('utils.php');
+	require_once('database.php');
 	$database = new Database();
 
 	$okMessage = 'Blog post submitted, thank you!';
