@@ -34,7 +34,6 @@ function createCommentPermlink(parentAuthor, parentPermlink)
 function main()
 {
 	config = JSON.parse(fs.readFileSync('./config/config.json', 'utf8'));
-	comment = JSON.parse(fs.readFileSync('./comments.json', 'utf8'));
 
 	mysqlConnection = mysql.createConnection({
 		host: config.host,
@@ -56,7 +55,7 @@ function main()
 
 			mysqlConnection.query("SELECT approved_posts.id, name AS author_name, permlink, category_id FROM approved_posts JOIN users ON approved_posts.author_id = users.id WHERE (approved_posts.commented_on IS NULL AND approved_posts.commented_on IS NULL)", function (error, rows, fields)
 			{
-			if (error)
+				if (error)
 				{
 					console.log("Failed to query approved posts");
 					throw error;
@@ -105,14 +104,17 @@ function main()
 								});
 
 								var commentPermlink = createCommentPermlink(currentAuthor, currentPermlink);
-								// get category based comment from comment.json 
-								if (typeof comment[categoryId] !== 'undefined'  || omment[categoryId] !== null)
+								
+								switch(categoryId)
 								{
-									body = comment[categoryId];
-								}
-								else	
-								{
-									body = comment["default"];
+									case 1:
+										body = config.makersComment;
+										break;
+									case 2:
+										body = config.diyComment;
+										break;
+									default:
+										body = config.defaultComment;
 								}
 								
 								steem.broadcast.comment(wif,  currentAuthor, currentPermlink, config.votingAccount, commentPermlink, "", body, "", function(err, result)
