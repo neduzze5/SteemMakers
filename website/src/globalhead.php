@@ -19,6 +19,8 @@
 		<meta name="msapplication-TileImage" content="img/favicon/ms-icon-144x144.png">
 		<meta name="theme-color" content="#ffffff">
 
+		<link href="https://fonts.googleapis.com/css?family=Rajdhani:700" rel="stylesheet">
+
 		<!-- investigate async and defer for loading js-->
 		<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -26,7 +28,7 @@
 		<script src="https://cdn.jsdelivr.net/npm/js-cookie@2.2.0/src/js.cookie.min.js"></script>
 		<script type="text/javascript" src="js/config.js"></script>
 		<script type="text/javascript" src="js/sc2.min.js"></script>
-		<script type="text/javascript" src="js/sc2.js?filever=<?php echo filesize('./js/steem.js')?>"></script>
+		<script type="text/javascript" src="js/sc2.js?filever=<?php echo filesize('./js/sc2.js')?>"></script>
 
 		<link href="css/bootstrap.min.css" rel="stylesheet"> 
 		<link href="css/main.css" rel="stylesheet"> 

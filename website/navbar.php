@@ -13,7 +13,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
 	<div class="container"> 
 		<img src="img/logo.png" width="40" height="40" style="margin:5px;">
-		<a class="navbar-brand" href="https://www.steemmakers.com" style="font-family: sans-serif; font-weight: 800; font-style: italic; font-size: 32pt; line-height: 32pt;">
+		<a class="navbar-brand" href="https://www.steemmakers.com" style="font-family: 'Rajdhani', sans-serif; font-size: 40px; line-height:40px; font-weight: 700; font-style: normal;">
 			SteemMakers
 		</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
