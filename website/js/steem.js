@@ -92,3 +92,51 @@ function storyPreview ( article, author, permlink, callback)
 		}
 	});
 }
+
+function createPostHtml (author, permlink)
+{
+	steem.api.getContent(author, permlink, function(err, post)
+	{
+		if(!err && post.body !== "")
+		{
+			// Remove html comments to prevent invalid result causing by for example only open tag and no close tag
+			var parsedBody = post.body.replace(/<!--([\s\S]+?)(-->|$)/g, '(html comment removed: $1)');
+
+			// Don't understand why
+			parsedBody = parsedBody.replace(/^\s+</gm, '<');
+
+			remarkable = new Remarkable(
+			{
+				html: true, // remarkable renders first then sanitize runs...
+				breaks: true,
+				linkify: false, // linkify is done locally
+				typographer: false, // https://github.com/jonschlinkert/remarkable/issues/142#issuecomment-221546793
+				quotes: '����',
+			});
+
+			parsedBody = remarkable.render(parsedBody);
+
+			const htmlReadyOptions = { mutate: true, resolveIframe: true };
+			if (parsedBody)
+			{
+				renderedText = htmlReady(parsedBody);
+			}
+
+			parsedBody = htmlReady(parsedBody, htmlReadyOptions);
+			parsedBody = parsedBody.replace(dtubeImageRegex, '');
+			parsedBody = sanitizeHtml(parsedBody, sanitizeConfig({}));
+			
+			parsedBody = "";
+		}
+	});
+}
+
+
+
+
+
+
+
+
+
+
