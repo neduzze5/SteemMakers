@@ -3,8 +3,6 @@ bot/node_modules/
 
 bot/package-lock\.json
 
-website/\.vscode/
-
 website/config/
 
 bot/config/config\.json
