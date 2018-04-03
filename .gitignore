@@ -10,3 +10,9 @@ website/config/
 bot/config/config\.json
 
 *.test
+
+website/node_modules/
+
+website/dist/
+
+website/package-lock\.json
