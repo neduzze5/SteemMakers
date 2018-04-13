@@ -14,5 +14,10 @@
     "vue-template-compiler": "^2.5.16",
     "webpack": "^4.4.1",
     "webpack-cli": "^2.0.13"
+  },
+  "dependencies": {
+    "@types/sanitize-html": "^1.14.0",
+    "sanitize-html": "^1.18.2",
+    "vue-router": "^3.0.1"
   }
 }

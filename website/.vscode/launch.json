@@ -8,7 +8,7 @@
             "name": "vuejs: chrome",
             "type": "chrome",
             "request": "launch",
-            "url": "http://localhost/post.php",
+            "url": "http://localhost/post.php?author=jefpatat&permlink=the-blockchain-truth-about-steem-and-dtube",
             "webRoot": "${workspaceFolder}",
             "breakOnLoad": true
         },

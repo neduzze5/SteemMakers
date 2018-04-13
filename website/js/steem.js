@@ -56,7 +56,7 @@ function generatePreviewHtml(post)
 		<img src="`+ generatePreviewImageURL(post) + `">
 		</div>
 		<div class="col-md-10">
-		<h5 class="font-weight-bold" style="margin-top:5px;">` + post.title + `</h5>
+		<h5 class="font-weight-bold" style="margin-top:5px;"><a href="post.php?author=` + post.author + `&permlink=` + post.permlink + `">` + post.title + `</a></h5>
 		<div class="multiline-ellipsis">
 			<p>` + generatePreviewText(post) + `</p>
 		</div>

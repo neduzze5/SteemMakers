@@ -1,25 +1,19 @@
-// Based on https://github.com/steemit/condenser/blob/66035f18dcbd3a67d5550e6828ea298c6df80d01/src/shared/HtmlReady.js
+// Based on condenser/src/shared/HtmlReady.js
 
-import {local} from './links';
+import {GetLocalURLRegExp, GetAnyURLRegExp, GetImageRegExp} from './links';
+import {proxyfyImageURL} from './image'
 
-export function htmlReady(html: string)
+let domParser = new DOMParser();
+
+export function prepareHTML(html: string) : string
 {
-	try
-	{
-		var div = document.createElement('div');
-		div.innerHTML = html.trim();
+	var div = document.createElement('div');
+	div.innerHTML = html.trim();
 
-		Traverse(div);
-		ProxifyImages(div);
-	
-		return div;
-	}
-	catch (error)
-	{
-		// Not Used, parseFromString might throw an error in the future
-		console.error(error.toString());
-		return null;
-	}
+	Traverse(div);
+	ProxifyImages(div);
+
+	return div.innerHTML;
 }
 
 function Traverse(node: Node)
@@ -33,9 +27,11 @@ function Traverse(node: Node)
 			if (tag === 'img') UpdateImage(element);
 			else if (tag === 'iframe') UpdateIframe(element);
 			else if (tag === 'a') UpdateLink(element);
-			// TODO
-			//else if (child.nodeName === '#text') linkifyNode(child, state);
 		}
+	}
+	else if (node.nodeName === '#text')
+	{
+		LinkifyNode(node);
 	}
 
 	if(node.firstChild)
@@ -81,7 +77,7 @@ function UpdateIframe(iFrameNode: Element)
 		else
 		{
 			var html = (new XMLSerializer()).serializeToString(iFrameNode);
-			iFrameNode.parentElement.replaceChild((new DOMParser).parseFromString(`<div class="videoWrapper">${html}</div>`, "text/xml"), iFrameNode);
+			iFrameNode.parentElement.replaceChild(domParser.parseFromString(`<div class="videoWrapper">${html}</div>`, "text/html"), iFrameNode);
 		}
 	}
 }
@@ -106,9 +102,36 @@ function ProxifyImages(element: Element)
 	for (var i = 0; i < imageElements.length; i++)
 	{
 		const url = imageElements[i].getAttribute('src');
-		if (url && !local().test(url))
+		if (url && !GetLocalURLRegExp().test(url))
 		{
-			//element.setAttribute('src', proxifyImageUrl(url, true));
+			imageElements[i].setAttribute('src', proxyfyImageURL(url));
+		}
+	}
+}
+
+function LinkifyNode(node: Node)
+{
+	if(node)
+	{
+		if(node.nodeValue)
+		{
+			let newContents = node.nodeValue.replace(GetAnyURLRegExp(), link =>
+			{
+				if (GetImageRegExp().test(link))
+				{
+					return `<img src="${link}" />`;
+				}
+				else
+				{
+					return '';
+				}
+			});
+
+			if(newContents !== node.nodeValue && node.parentNode)
+			{
+				let doc = domParser.parseFromString(`<span>${newContents}</span>`, "text/html");
+				node.parentNode.replaceChild(doc.body.childNodes[0], node);
+			}
 		}
 	}
 }

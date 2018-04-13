@@ -20,6 +20,8 @@
 		<meta name="theme-color" content="#ffffff">
 
 		<link href="https://fonts.googleapis.com/css?family=Rajdhani:700" rel="stylesheet">
+		<link href='http://fonts.googleapis.com/css?family=Roboto:400,400i,500,700|Lato:400,400i,700,700i,900|Righteous' media='all' rel='stylesheet' type='text/css'/>
+		<link href='//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css' rel='stylesheet'/>
 
 		<!-- investigate async and defer for loading js-->
 		<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
