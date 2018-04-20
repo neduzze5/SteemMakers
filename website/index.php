@@ -17,7 +17,7 @@
 				
 				$query = "SELECT name, p.permlink FROM (SELECT * FROM approved_posts) p INNER JOIN users u ON p.author_id = u.id ORDER BY p.reviewed_on DESC";
 
-				$limit = ( isset( $_GET['limit'] ) ) ? $_GET['limit'] : 5;
+				$limit = ( isset( $_GET['limit'] ) ) ? $_GET['limit'] : 10;
 				$page = ( isset( $_GET['page'] ) ) ? $_GET['page'] : 1;
 				$links = 3;
 

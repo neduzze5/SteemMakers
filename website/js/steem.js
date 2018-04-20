@@ -60,8 +60,6 @@ function generatePreviewHtml(post)
 		<div class="multiline-ellipsis">
 			<p>` + generatePreviewText(post) + `</p>
 		</div>
-		<a href="https://steemit.com` + post.url + `" target="_blank"><img class="media-button" src="img/steemit.png"></a>
-		<a href="https://busy.org` + post.url + `" target="_blank"><img class="media-button" src="img/busy.png"></a>
 		</div>`;
 
 		return previewHtml;
