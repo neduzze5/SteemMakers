@@ -22,7 +22,12 @@ export function GetLocalURLRegExp()
 	return new RegExp(urlSet('(?:localhost|(?:.*\\.)?steemit.com)'), 'i');
 }
 
-export function GetImageRegExp()
+export function GetAnyImageURLRegExp()
 {
-	return new RegExp(urlSet(domainPath, imagePath), 'i');
+	return new RegExp(urlSet(domainPath, imagePath), 'gi');
+}
+
+export function GetAnyYouTubeURLRegExp()
+{
+	return new RegExp(urlSet('(?:(?:.*.)?youtube.com|youtu.be)'), 'gi');
 }

@@ -10,10 +10,12 @@
 		<?php include("navbar.php"); ?>
 		<div class="container article">
 			<div class="row">
-				<div id="app"></div>
+				<div style="width: 100%; position: relative;">
+					<div id="app" ></div>
+				</div>
 			</div>
 		</div>
 		<?php include("footer.php"); ?>
 	</body>
-	<script src="./dist/build.js"></script>
+	<script src="./dist/build.js?filever=<?php echo filesize('./dist/build.js')?>""></script>
 </html>

@@ -33,4 +33,4 @@
 		<script type="text/javascript" src="js/sc2.js?filever=<?php echo filesize('./js/sc2.js')?>"></script>
 
 		<link href="css/bootstrap.min.css" rel="stylesheet"> 
-		<link href="css/main.css" rel="stylesheet"> 
+		<link href="css/main.css?filever=<?php echo filesize('./css/main.css')?>" rel="stylesheet"> 
