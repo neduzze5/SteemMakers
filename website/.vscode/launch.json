@@ -8,7 +8,10 @@
             "name": "vuejs: chrome",
             "type": "chrome",
             "request": "launch",
-            "url": "http://localhost/post.php?author=jefpatat&permlink=the-blockchain-truth-about-steem-and-dtube",
+			"url": "http://localhost/post.php?author=makerhacks&permlink=python-arcade-full-game-demonstration",
+			//"url": "http://localhost/post.php?author=wieske&permlink=5jl4z5-test",
+			//"url": "http://localhost/post.php?author=therascal&permlink=529b6dc0-2005-11e8-8d9c-0242ac110002",
+			//"url": "http://localhost/post.php?author=rasor&permlink=73clwotn",
             "webRoot": "${workspaceFolder}",
             "breakOnLoad": true
         },

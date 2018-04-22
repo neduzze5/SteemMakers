@@ -5,7 +5,7 @@ var webpack = require('webpack')
 
 module.exports = {
 	mode: 'development',
-  entry: './src/ts/index.ts',
+  entry: './src/ts/main.ts',
   output: {
     path: path.resolve(__dirname, './dist'),
     publicPath: '/dist/',
