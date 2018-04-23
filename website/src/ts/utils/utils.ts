@@ -4,10 +4,12 @@ declare var Remarkable:any;
 
 steem.api.setOptions({ url: 'https://api.steemit.com' });
 
-export function createPostHtml (author: string, permlink: string, callback: (error :string|null, body :string) => void) : void
+export function createPostHtml (author: string, permlink: string, callback: (error :string|null, result :BlogEntry) => void) : void
 {
 	steem.api.getContent(author, permlink, function(err, post)
 	{
+		let result = {} as BlogEntry;
+
 		if(!err && post.body !== "")
 		{
 			// Remove html comments to preventapi invalid result causing by for example only open tag and no close tag
@@ -143,13 +145,16 @@ export function createPostHtml (author: string, permlink: string, callback: (err
 
 			parsedBody = sanitize(parsedBody, options);
 
-			parsedBody = `<h1>${post.title}</h1>` + parsedBody;
+			result.author = post.author;
+			result.created = new Date(post.created + '.000Z');
+			result.title = post.title;
+			result.body = parsedBody;
 
-			callback(null, parsedBody);
+			callback(null, result);
 		}
 		else
 		{
-			callback(err, '');
+			callback(err, result);
 		}
 	});
 }
