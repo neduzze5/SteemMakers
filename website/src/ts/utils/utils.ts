@@ -144,11 +144,14 @@ export function createPostHtml (author: string, permlink: string, callback: (err
 			};
 
 			parsedBody = sanitize(parsedBody, options);
+			parsedBody.replace('<code>', '<pre><code>');
+			parsedBody.replace('</code>', '</code></pre>');
 
 			result.author = post.author;
+			result.body = parsedBody;
 			result.created = new Date(post.created + '.000Z');
 			result.title = post.title;
-			result.body = parsedBody;
+			result.url = post.url;
 
 			callback(null, result);
 		}

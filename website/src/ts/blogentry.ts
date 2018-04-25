@@ -1,7 +1,8 @@
 interface BlogEntry
 {
-	created: Date;
-	title: string;
 	author: string;
 	body: string;
+	created: Date;
+	title: string;
+	url: string;
 }

@@ -101,7 +101,6 @@ body
   width: 20px;
   height: 20px;
   border-radius: 2px;
-  margin-top: 5px;
   margin-left: 5px;
   float: right;
 }
@@ -143,6 +142,12 @@ body
 {
 	font-family: 'Lato', sans-serif;
 	font-weight: 400;
+}
+
+.article code
+{
+	border: 2px solid #bdbdbd;
+	border-radius: 5px;
 }
 
 .article blockquote

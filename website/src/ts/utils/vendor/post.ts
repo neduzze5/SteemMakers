@@ -6,5 +6,6 @@ declare namespace steem
 		body: string;
 		created: string;
 		title: string;
+		url: string;
 	}
 }
